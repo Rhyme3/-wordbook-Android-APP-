@@ -76,6 +76,7 @@ public class MyAdapter extends ListAdapter<Word,MyAdapter.MyViewHolder> {
                 bundle.putString("english", word.getWord());
                 bundle.putString("chinese", word.getChineseMeaning());
                 bundle.putInt("id", word.getId());
+                bundle.putString("title", "Edit");
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_wordsFragment_to_addFragment, bundle);
                 return true;
