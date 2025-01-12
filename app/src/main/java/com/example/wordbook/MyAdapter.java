@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +65,20 @@ public class MyAdapter extends ListAdapter<Word,MyAdapter.MyViewHolder> {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(uri);
                 holder.itemView.getContext().startActivity(intent);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Word word = (Word)holder.itemView.getTag(R.id.word_for_view_holder);
+                Bundle bundle = new Bundle();
+                bundle.putString("english", word.getWord());
+                bundle.putString("chinese", word.getChineseMeaning());
+                bundle.putInt("id", word.getId());
+                NavController navController = Navigation.findNavController(v);
+                navController.navigate(R.id.action_wordsFragment_to_addFragment, bundle);
+                return true;
             }
         });
 
